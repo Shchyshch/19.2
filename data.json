@@ -1,0 +1,23 @@
+[
+  {
+    "model": "catalog.category",
+    "fields": {
+      "name": "A",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "fields": {
+      "name": "B",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "fields": {
+      "name": "C",
+      "description": null
+    }
+  }
+]
