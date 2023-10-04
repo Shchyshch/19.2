@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+{% include 'catalog/includes/inc_header.html' %}
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'catalog:create_material' %}">Добавить материал</a>
+</div>
+
+<div class="row">
+    {% for object in object_list %}
+    <div class="col-6">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li> {{ object.body|slice:":100" }}</li>
+                </ul>
+                <div class="btn-group">
+                    <a href="{% url 'catalog:view_material' object.pk %}"
+                       class="p-2 btn btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'catalog:edit_material' object.pk %}"
+                       class="p-2 btn btn-outline-primary">Изменить</a>
+                    <a href="{% url 'catalog:delete_material' object.pk %}"
+                       class="p-2 btn btn-outline-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
