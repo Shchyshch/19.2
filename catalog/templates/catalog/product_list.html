@@ -3,8 +3,11 @@
 {% block content %}
 {% include 'catalog/includes/inc_header.html' %}
 <div class="row">
+    <div class="col-12 mb-5">
+        <a class="btn btn-primary" href="{% url 'catalog:product_create' %}">Добавить продукт</a>
+    </div>
     {% for object in object_list %}
-    <div class="col-3">
+    <div class="col-6">
         <div class="card mb-4 box-shadow">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
@@ -13,8 +16,20 @@
                 <h1 class="card-title pricing-card-title">RUR {{ object.price }}</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                     <li> {{ object.description|slice:":100" }}</li>
+                    {% for version in object.version_set.all %}
+                    {% if version.is_active %}
+                        <p>Активная версия: {{ version.name }} {{ version.number }}</p>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
-                <a href="{% url 'catalog:product' object.pk %}" class="p-2 btn btn-outline-primary">Подробнее</a>
+                <div class="btn-group">
+                    <a href="{% url 'catalog:product' object.pk %}"
+                       class="p-2 btn btn-outline-primary">Подробнее</a>
+                    <a href="{% url 'catalog:product_update' object.pk %}"
+                       class="p-2 btn btn-outline-primary">Изменить</a>
+                    <a href="{% url 'catalog:product_delete' object.pk %}"
+                       class="p-2 btn btn-outline-danger">Удалить</a>
+                </div>
             </div>
         </div>
     </div>
